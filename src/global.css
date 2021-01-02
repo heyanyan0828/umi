@@ -1,0 +1,10 @@
+.list-table{
+    width: 850px;
+    /* //上下页面空白为 0px */
+    /* //左右页面空白自适应并且相等 */
+    /* //可以达到横向居中的效果 */
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px;
+}
