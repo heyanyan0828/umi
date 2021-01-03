@@ -1,65 +1,73 @@
 import React from 'react';
-import { Table, Tag,Space } from 'antd';
+import { Table, Tag, Space, Modal, Button } from 'antd';
+import { connect } from '@@/plugin-dva/exports';
 // import {connect} from 'umi'
 
-const index=()=>{
-    const columns = [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: (text: React.ReactNode) => <a>{text}</a>,
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-        },
-        {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
-        },
-        {
-          title: 'Tags',
-          key: 'tags',
-          dataIndex: 'tags',
-          render: (tags: any[]) => (
-            <>
-              {tags.map(tag => {
-                let color = tag.length > 5 ? 'geekblue' : 'green';
-                if (tag === 'loser') {
-                  color = 'volcano';
-                }
-                return (
-                  <Tag color={color} key={tag}>
-                    {tag.toUpperCase()}
-                  </Tag>
-                );
-              })}
-            </>
-          ),
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text: any, record: { name: React.ReactNode; }) => (
-            <Space size="middle">
-              <a>Invite {record.name}</a>
-              <a>Delete</a>
-            </Space>
-          ),
-        },
-      ];
+// function index(users) {
+//
+// }
+// const index = (props:any) =>{
+const index = ({ data }: any) => {
+  // console.log(props)
 
-    const data = [
-      {name:'zhangsan',age:16,address:'guangzhou',tags:['11','22','loser']}
-      ];
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text: React.ReactNode) => <a>{text}</a>,
+    },
+    {
+      title: 'Create_Time',
+      dataIndex: 'Create_Time',
+      key: 'Create_Time',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text: any, record: { name: React.ReactNode }) => (
+        <div>
+          <a>Edit</a>&nbsp;&nbsp;&nbsp;
+          <a>Delete</a>
+        </div>
+      ),
+    },
+  ];
 
-    return (
-    <div className='list-table'><Table columns={columns} dataSource={data} />
+  // const data = [ //字段
+  //   {id:1,name:'zhangsan',Create_Time:'2021-01-03'},
+  //   {id:2,name:'lisi',Create_Time:'2021-01-04'},
+  //   {id:3,name:'wangwu',Create_Time:'2021-01-05'},
+  //   ];
+
+  return (
+    <div className="list-table">
+      <Table columns={columns} dataSource={data} />
+      <Modal title="Basic Modal" visible={false}></Modal>
     </div>
-    );
+  );
 };
+//
+// function mapStateToProps(users){
+// 映射 state 成为 props 属性
+// }
+// const  mapStateToProps = ({users}:any)=>{
+//   console.log(users);
+//   return{
+//     users
+//   }
+// }
 
-export default index;
+//
+
+// connect(function)(function)
+
+export default connect(function (allModels: any) {
+  console.log(allModels.users);
+  return allModels.users;
+})(index);

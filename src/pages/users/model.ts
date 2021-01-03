@@ -1,34 +1,36 @@
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 
-export interface IndexModelState {
-  name: string;
+export interface UsersModelState {
+  data: any;
 }
 
-export interface IndexModelType {
-  namespace: 'index';
-  state: IndexModelState;
+export interface UsersModelType {
+  namespace: 'users';
+  state: UsersModelState;
   effects: {
     query: Effect;
   };
   reducers: {
-    save: Reducer<IndexModelState>;
+    save: Reducer<UsersModelState>;
     // 启用 immer 之后
-    // save: ImmerReducer<IndexModelState>;
+    // save: ImmerReducer<UsersModelState>;
   };
   subscriptions: { setup: Subscription };
 }
 
-const IndexModel: IndexModelType = {
-  namespace: 'index',
+const UsersModel: UsersModelType = {
+  namespace: 'users',
 
   state: {
-    name: '',
+    data: [
+      { id: 1, name: 'zhangsan3', Create_Time: '2021-01-03' },
+      { id: 2, name: 'lisi', Create_Time: '2021-01-04' },
+      { id: 3, name: 'wangwu', Create_Time: '2021-01-05' },
+    ],
   },
 
   effects: {
-    *query({ payload }, { call, put }) {
-      console.log("query..................")
-    },
+    *query({ payload }, { call, put }) {},
   },
   reducers: {
     save(state, action) {
@@ -48,11 +50,11 @@ const IndexModel: IndexModelType = {
         if (pathname === '/') {
           dispatch({
             type: 'query',
-          })
+          });
         }
       });
-    }
-  }
+    },
+  },
 };
 
-export default IndexModel;
+export default UsersModel;
