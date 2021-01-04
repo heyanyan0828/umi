@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'antd';
 
 const UsersModel = (props: any) => {
+  // @ts-ignore
   return (
     <div>
       <Modal
@@ -9,7 +10,9 @@ const UsersModel = (props: any) => {
         visible={props.visible}
         onOk={props.closeHandler}
         onCancel={props.closeHandler}
-      ></Modal>
+      >
+        {JSON.stringify(props.record)}
+      </Modal>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import UsersModel from '@/pages/users/components/UserModal';
 const index = ({ data }: any) => {
   // console.log(props)
   const [modelVisible, setModelVisible] = useState(false);
+  const [record, setRecord] = useState(undefined);
   const columns = [
     {
       title: 'ID',
@@ -33,7 +34,14 @@ const index = ({ data }: any) => {
       key: 'action',
       render: (text: any, record: { name: React.ReactNode }) => (
         <div>
-          <a onClick={visibleHandler}>Edit</a>&nbsp;&nbsp;&nbsp;
+          <a
+            onClick={() => {
+              editHandler(record);
+            }}
+          >
+            Edit
+          </a>
+          &nbsp;&nbsp;&nbsp;
           <a>Delete</a>
         </div>
       ),
@@ -46,8 +54,9 @@ const index = ({ data }: any) => {
   //   {id:3,name:'wangwu',Create_Time:'2021-01-05'},
   //   ];
   //
-  const visibleHandler = () => {
+  const editHandler = (record: any) => {
     setModelVisible(true);
+    setRecord(record);
   };
   const closeHandler = () => {
     setModelVisible(false);
@@ -58,6 +67,7 @@ const index = ({ data }: any) => {
       <UsersModel
         visible={modelVisible}
         closeHandler={closeHandler}
+        record={record}
       ></UsersModel>
     </div>
   );
