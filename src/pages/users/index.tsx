@@ -49,10 +49,16 @@ const index = ({ data }: any) => {
   const visibleHandler = () => {
     setModelVisible(true);
   };
+  const closeHandler = () => {
+    setModelVisible(false);
+  };
   return (
     <div className="list-table">
       <Table columns={columns} dataSource={data} />
-      <UsersModel visible={modelVisible}></UsersModel>
+      <UsersModel
+        visible={modelVisible}
+        closeHandler={closeHandler}
+      ></UsersModel>
     </div>
   );
 };
