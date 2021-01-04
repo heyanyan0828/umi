@@ -63,7 +63,7 @@ const index = ({ data }: any) => {
   };
   return (
     <div className="list-table">
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data} rowKey="id" />
       <UsersModel
         visible={modelVisible}
         closeHandler={closeHandler}

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Button, Form, Input } from 'antd';
 
 const UsersModel = (props: any) => {
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(props.record);
+  }, [props.visible]);
+
   // @ts-ignore
   return (
     <div>
@@ -10,8 +15,9 @@ const UsersModel = (props: any) => {
         visible={props.visible}
         onOk={props.closeHandler}
         onCancel={props.closeHandler}
+        forceRender
       >
-        <Form name="basic">
+        <Form name="basic" form={form}>
           <Form.Item
             label="Name"
             name="name"
