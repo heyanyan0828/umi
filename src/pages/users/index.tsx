@@ -44,16 +44,16 @@ const index = ({ data }: any) => {
   //   {id:2,name:'lisi',Create_Time:'2021-01-04'},
   //   {id:3,name:'wangwu',Create_Time:'2021-01-05'},
   //   ];
-
+  //
   return (
     <div className="list-table">
       <Table columns={columns} dataSource={data} />
-      <Modal title="Basic Modal" visible={false}></Modal>
+      <Modal title="Basic Modal" visible={true}></Modal>
     </div>
   );
 };
-//
-// function mapStateToProps(users){
+// //
+// // function mapStateToProps(users){
 // 映射 state 成为 props 属性
 // }
 // const  mapStateToProps = ({users}:any)=>{
@@ -62,12 +62,9 @@ const index = ({ data }: any) => {
 //     users
 //   }
 // }
-
-//
-
 // connect(function)(function)
 
 export default connect(function (allModels: any) {
-  console.log(allModels.users);
+  // console.log(allModels.users);
   return allModels.users;
 })(index);

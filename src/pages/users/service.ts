@@ -5,11 +5,11 @@ export const getRemoteList = async (params: any) => {
       method: 'get',
     })
       // 成功
-      .then(function (response) {
+      .then(function (response: any) {
         return response;
       })
       // 失败
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.log(error);
       })
   );

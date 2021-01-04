@@ -1,4 +1,5 @@
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
+import { getRemoteList } from '@/pages/users/service';
 
 export interface UsersModelState {
   data: any;
@@ -30,10 +31,19 @@ const UsersModel: UsersModelType = {
   },
 
   effects: {
-    *query({ payload }, { call, put }) {},
+    *getRemote(action: any, { call, put }: any) {
+      const data = yield call(getRemoteList);
+      console.log(data);
+      yield put({
+        type: 'getList',
+        payload: {
+          data,
+        },
+      });
+    },
   },
   reducers: {
-    save(state, action) {
+    save(state: any, action: any) {
       return {
         ...state,
         ...action.payload,
@@ -45,8 +55,8 @@ const UsersModel: UsersModelType = {
     // },
   },
   subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
+    setup({ dispatch, history }: any) {
+      return history.listen(({ pathname }: any) => {
         if (pathname === '/') {
           dispatch({
             type: 'query',
