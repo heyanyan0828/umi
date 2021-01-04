@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, Tag, Space, Modal, Button } from 'antd';
 import { connect } from '@@/plugin-dva/exports';
+import UsersModel from '@/pages/users/components/UserModal';
 // import {connect} from 'umi'
 
 // function index(users) {
@@ -9,7 +10,7 @@ import { connect } from '@@/plugin-dva/exports';
 // const index = (props:any) =>{
 const index = ({ data }: any) => {
   // console.log(props)
-
+  const [modelVisible, setModelVisible] = useState(false);
   const columns = [
     {
       title: 'ID',
@@ -32,7 +33,7 @@ const index = ({ data }: any) => {
       key: 'action',
       render: (text: any, record: { name: React.ReactNode }) => (
         <div>
-          <a>Edit</a>&nbsp;&nbsp;&nbsp;
+          <a onClick={visibleHandler}>Edit</a>&nbsp;&nbsp;&nbsp;
           <a>Delete</a>
         </div>
       ),
@@ -45,10 +46,13 @@ const index = ({ data }: any) => {
   //   {id:3,name:'wangwu',Create_Time:'2021-01-05'},
   //   ];
   //
+  const visibleHandler = () => {
+    setModelVisible(true);
+  };
   return (
     <div className="list-table">
       <Table columns={columns} dataSource={data} />
-      <Modal title="Basic Modal" visible={true}></Modal>
+      <UsersModel visible={modelVisible}></UsersModel>
     </div>
   );
 };
