@@ -24,7 +24,7 @@ const UsersModel: UsersModelType = {
 
   state: {
     data: [
-      { id: 1, name: 'zhangsan3', Create_Time: '2021-01-03' },
+      { id: 1, name: 'zhangsan3', Create_Time: '2021-01-03', status: 'hahaha' },
       { id: 2, name: 'lisi', Create_Time: '2021-01-04' },
       { id: 3, name: 'wangwu', Create_Time: '2021-01-05' },
     ],

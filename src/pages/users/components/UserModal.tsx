@@ -6,6 +6,7 @@ const UsersModel = (props: any) => {
   useEffect(() => {
     form.setFieldsValue(props.record);
   }, [props.visible]);
+  console.log(props.record);
 
   // @ts-ignore
   return (
@@ -31,11 +32,11 @@ const UsersModel = (props: any) => {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Email" name="email">
+          <Form.Item label="ID" name="id">
             <Input />
           </Form.Item>
 
-          <Form.Item label="Create Time" name="create time">
+          <Form.Item label="Create Time" name="Create_Time">
             <Input />
           </Form.Item>
 
