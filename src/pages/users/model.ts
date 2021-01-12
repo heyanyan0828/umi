@@ -2,17 +2,19 @@ import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 import { getRemoteList } from '@/pages/users/service';
 
 export interface UsersModelState {
-  data: any;
+  user: any;
 }
 
 export interface UsersModelType {
   namespace: 'users';
-  state: UsersModelState;
+  state: any;
   effects: {
-    query: Effect;
+    // query: Effect;
+    getRemote: Effect;
   };
   reducers: {
-    save: Reducer<UsersModelState>;
+    getList: Reducer<UsersModelState>;
+    // save: Reducer<UsersModelState>;
     // 启用 immer 之后
     // save: ImmerReducer<UsersModelState>;
   };
@@ -22,33 +24,30 @@ export interface UsersModelType {
 const UsersModel: UsersModelType = {
   namespace: 'users',
 
-  state: {
-    data: [
-      { id: 1, name: 'zhangsan3', Create_Time: '2021-01-03', status: 'hahaha' },
-      { id: 2, name: 'lisi', Create_Time: '2021-01-04' },
-      { id: 3, name: 'wangwu', Create_Time: '2021-01-05' },
-    ],
-  },
+  state: {},
 
   effects: {
     *getRemote(action: any, { call, put }: any) {
-      const data = yield call(getRemoteList);
-      console.log(data);
+      const user = yield call(getRemoteList);
+      // console.log(data);
       yield put({
         type: 'getList',
-        payload: {
-          data,
-        },
+        payload: user, // {payload: user}
       });
     },
   },
   reducers: {
-    save(state: any, action: any) {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    //Reducer
+    getList(state, { payload }) {
+      return payload;
     },
+
+    // save(state: any, action: any) {
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // },
     // 启用 immer 之后
     // save(state, action) {
     //   state.name = action.payload;
@@ -57,9 +56,9 @@ const UsersModel: UsersModelType = {
   subscriptions: {
     setup({ dispatch, history }: any) {
       return history.listen(({ pathname }: any) => {
-        if (pathname === '/') {
+        if (pathname === '/users') {
           dispatch({
-            type: 'query',
+            type: 'getRemote',
           });
         }
       });

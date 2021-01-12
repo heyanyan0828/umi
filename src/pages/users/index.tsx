@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Table, Tag, Space, Modal, Button } from 'antd';
 import { connect } from '@@/plugin-dva/exports';
+import React, { useState } from 'react';
 import UsersModel from '@/pages/users/components/UserModal';
+import { Table, Tag, Space, Modal } from 'antd';
 // import {connect} from 'umi'
 
 // function index(users) {
 //
 // }
 // const index = (props:any) =>{
-const index = ({ data }: any) => {
-  // console.log(props)
+const index = (props: any) => {
+  //property
+  // console.log(props,"000")
   const [modelVisible, setModelVisible] = useState(false);
   const [record, setRecord] = useState(undefined);
   const columns = [
@@ -61,9 +62,12 @@ const index = ({ data }: any) => {
   const closeHandler = () => {
     setModelVisible(false);
   };
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
   return (
     <div className="list-table">
-      <Table columns={columns} dataSource={data} rowKey="id" />
+      <Table columns={columns} dataSource={props.data} rowKey="id" />
       <UsersModel
         visible={modelVisible}
         closeHandler={closeHandler}
@@ -86,5 +90,5 @@ const index = ({ data }: any) => {
 
 export default connect(function (allModels: any) {
   // console.log(allModels.users);
-  return allModels.users;
+  return allModels.users; // {data:[...],meta:{}}
 })(index);

@@ -4,5 +4,12 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  dva:{}
+  proxy: {
+    '/api': {
+      target: 'http://public-api-v1.aspirantzhang.com',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
+  dva: {},
 });
